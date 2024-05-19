@@ -20,7 +20,33 @@ export class GroupPage extends BasePage {
   }
 
   async isCurrentDayHighlighted() {
+    const daysOfWeek = [
+      "понедельник",
+      "вторник",
+      "среда",
+      "четверг",
+      "пятница",
+      "суббота",
+      "воскресенье"
+    ];
+
+    const today = new Date();
+    const todayDayOfWeek = today.getDay();
+    
+    if (todayDayOfWeek === 0) {
+      try {
+        const currentDayElement = await this.getElement(this.currentDay);
+        return !currentDayElement.isDisplayed();
+      } catch (e) {
+        return true;
+      }
+    }
     const currentDayElement = await this.getElement(this.currentDay);
-    return currentDayElement.isDisplayed();
+    if (await currentDayElement.isDisplayed()) {
+      const highlightedDayText = await currentDayElement.getText();
+      return highlightedDayText.toLowerCase() === daysOfWeek[todayDayOfWeek - 1];
+    }
+
+    return false;
   }
 }
