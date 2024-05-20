@@ -24,7 +24,8 @@ describe("Amazon Smoke Tests", function () {
     await driver.quit();
   });
 
-  it("should open the Amazon home page", async () => {
+  it("should open the Amazon home page", async function () {
+    const testName = this.test.fullTitle();
     try {
       await homePage.open();
       await driver.sleep(10000);
@@ -36,7 +37,8 @@ describe("Amazon Smoke Tests", function () {
     }
   });
 
-  it("should search for a product", async () => {
+  it("should search for a product", async function () {
+    const testName = this.test.fullTitle();
     try {
       await homePage.open();
       await homePage.searchForItem("laptop");
@@ -50,7 +52,8 @@ describe("Amazon Smoke Tests", function () {
     }
   });
 
-  it("should add a product to the cart", async () => {
+  it("should add a product to the cart", async function () {
+    const testName = this.test.fullTitle();
     try {
       await homePage.open();
       await homePage.searchForItem("laptop");
